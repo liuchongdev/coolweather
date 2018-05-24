@@ -1,7 +1,9 @@
-package com.android.coolweather;
+package com.coolweather.android;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.android.coolweather.R;
 
 public class MainActivity extends Activity {
 
