@@ -2,8 +2,10 @@ package com.coolweather.android;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-import com.android.coolweather.R;
+import org.litepal.LitePal;
 
 public class MainActivity extends Activity {
 
