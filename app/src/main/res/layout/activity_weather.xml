@@ -12,31 +12,55 @@
         android:scaleType="centerCrop"/>
 
      <!-- 可以滚动查看屏幕以外的内容 -->
-    <ScrollView
-        android:id="@+id/weather_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:overScrollMode="never">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"><!--会为系统状态栏留出空间-->
+     <android.support.v4.widget.DrawerLayout
+                android:id="@+id/drawer_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <include layout="@layout/title" />
+             <!--主屏幕的内容-->
+             <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe_refresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <include layout="@layout/now" />
+                    <ScrollView
+                        android:id="@+id/weather_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="none"
+                        android:overScrollMode="never">
 
-            <include layout="@layout/forecast" />
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fitsSystemWindows="true"><!--会为系统状态栏留出空间 -->
 
-            <include layout="@layout/api" />
+                            <include layout="@layout/title" />
 
-            <include layout="@layout/suggestion" />
+                            <include layout="@layout/now" />
 
-        </LinearLayout>
+                            <include layout="@layout/forecast" />
 
-    </ScrollView>
+                            <include layout="@layout/api" />
+
+                            <include layout="@layout/suggestion" />
+
+                        </LinearLayout>
+
+                    </ScrollView>
+
+             </android.support.v4.widget.SwipeRefreshLayout>
+
+            <!-- 滑动菜单中的显示的内容 -->
+            <fragment
+                android:id="@+id/choose_area_fragment"
+                android:name="com.coolweather.android.ChooseAreaFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start" />
+
+     </android.support.v4.widget.DrawerLayout>
 
 </FrameLayout>

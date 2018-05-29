@@ -34,7 +34,7 @@ import okhttp3.Response;
 /**
  * Created by Administrator on 2018/5/24
  */
-public class ChooseAreaFragment extends android.support.v4.app.Fragment{
+public class ChooseAreaFragment extends Fragment{
 
     public static final  int LEVEL_PROVINCE = 0;
 
@@ -120,11 +120,22 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment{
                 //当前级别是 LEVEL_COUNTY,就启动 WeatherActivity,把当前天气id传递过去
                 else if(currentLevel == LEVEL_COUNTY){
                     String weatherId = countyList.get(position).getWeatherId();
-                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
-                    intent.putExtra("weather_id",weatherId);
-                    //从省市县列表界面跳转到天气界面
-                    startActivity(intent);
-                    getActivity().finish();
+                    if(getActivity() instanceof  MainActivity){
+                        Intent intent = new Intent(getActivity(),WeatherActivity.class);
+                        intent.putExtra("weather_id",weatherId);
+                        //从省市县列表界面跳转到天气界面
+                        startActivity(intent);
+                        getActivity().finish();
+                    }else if(getActivity() instanceof  WeatherActivity){
+                        WeatherActivity activity = (WeatherActivity) getActivity();
+                        //关闭滑动菜单
+                        activity.drawerLayout.closeDrawers();
+                        //显示下拉刷新
+                        activity.swipeRefresh.setRefreshing(true);
+                        //请求新城市的天气信息
+                        activity.requestWeather(weatherId);
+                    }
+
                 }
             }
         });
